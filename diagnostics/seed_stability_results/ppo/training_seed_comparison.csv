@@ -1,0 +1,4 @@
+experiment,training_seed,training_episodes,evaluation_episodes,trained_mean_reward,trained_connection_rate,trained_reward_std,random_mean_reward,random_connection_rate
+PPO_06,101,2000,100,1.0679999999999998,0.78,1.2202852125630301,0.1109,0.55
+PPO_06,202,2000,100,1.0456,0.86,1.107962382032892,0.1109,0.55
+PPO_06,303,2000,100,0.9434,0.85,1.091570629872387,0.1109,0.55

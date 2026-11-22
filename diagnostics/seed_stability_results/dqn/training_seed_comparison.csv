@@ -1,0 +1,4 @@
+experiment,training_seed,training_episodes,evaluation_episodes,trained_mean_reward,trained_connection_rate,trained_reward_std,random_mean_reward,random_connection_rate
+DQN_09,101,2000,100,1.2029,0.86,0.9916685887936554,0.1109,0.55
+DQN_09,202,2000,100,1.1181999999999999,0.84,1.1374395632296248,0.1109,0.55
+DQN_09,303,2000,100,1.0687,0.84,1.144991401714441,0.1109,0.55

@@ -1,0 +1,13 @@
+{
+  "training_seeds": [
+    101,
+    202,
+    303
+  ],
+  "n_training_seeds": 3,
+  "mean_reward_across_seeds": 1.1299333333333335,
+  "sd_reward_across_seeds": 0.06786503763598266,
+  "mean_connection_rate_across_seeds": 0.8466666666666667,
+  "sd_connection_rate_across_seeds": 0.011547005383792525,
+  "interpretation": "Across independent train seeds; scores share a fixed synthetic evaluation cohort"
+}

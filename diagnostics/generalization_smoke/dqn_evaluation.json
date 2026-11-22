@@ -1,0 +1,72 @@
+{
+  "algorithm": "dqn",
+  "checkpoint": "experiments\\results\\dqn\\DQN_09\\model.pth",
+  "training_seed": 42,
+  "evaluation_only": true,
+  "cohorts": {
+    "standard": {
+      "trained": {
+        "episodes": 20,
+        "mean_reward": 1.529,
+        "reward_sd": 0.6443348263294889,
+        "connection_rate": 0.95,
+        "mean_connection_probability": 0.8083896577358246,
+        "reward_vs_random": {
+          "mean_difference": 1.3075000000000003,
+          "ci95_lower": 0.7162000000000001,
+          "ci95_upper": 2.0066124999999997
+        },
+        "connection_vs_random": {
+          "mean_difference": 0.35,
+          "ci95_lower": 0.17375000000000002,
+          "ci95_upper": 0.55
+        }
+      },
+      "random": {
+        "episodes": 20,
+        "mean_reward": 0.22149999999999997,
+        "connection_rate": 0.6
+      }
+    },
+    "access_barrier_stress": {
+      "trained": {
+        "episodes": 20,
+        "mean_reward": 0.16000000000000014,
+        "reward_sd": 1.538967528127731,
+        "connection_rate": 0.5,
+        "mean_connection_probability": 0.6057054251432419,
+        "reward_vs_random": {
+          "mean_difference": 0.8960000000000002,
+          "ci95_lower": 0.5293500000000002,
+          "ci95_upper": 1.4412875000000003
+        },
+        "connection_vs_random": {
+          "mean_difference": 0.2,
+          "ci95_lower": 0.023750000000000007,
+          "ci95_upper": 0.35
+        }
+      },
+      "random": {
+        "episodes": 20,
+        "mean_reward": -0.736,
+        "connection_rate": 0.3
+      }
+    }
+  },
+  "protocol": {
+    "episodes_per_cohort": 20,
+    "standard_seed_start": 5000,
+    "stress_seed_start": 8000,
+    "bootstrap_resamples": 100,
+    "policy": "greedy deterministic",
+    "random_policy": "uniform across five actions",
+    "paired_random_outcomes": "same environment episode seeds; each policy has an independent action RNG",
+    "stress_test": "access barrier present; phone=0; telehealth=0; risk in [0.80,0.90)",
+    "claim_limit": "Synthetic distribution shift, NOT real-world generalization or training-seed stability"
+  },
+  "stress_minus_standard": {
+    "mean_reward": -1.3689999999999998,
+    "connection_rate": -0.44999999999999996,
+    "interpretation": "Descriptive between-cohort difference; not a paired controlled effect"
+  }
+}

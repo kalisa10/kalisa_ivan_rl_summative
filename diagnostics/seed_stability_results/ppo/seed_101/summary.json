@@ -1,0 +1,24 @@
+{
+  "algorithm": "ppo",
+  "experiment": "PPO_06",
+  "training_seed": 101,
+  "training_episodes": 2000,
+  "evaluation_episodes": 100,
+  "evaluation_seed_start": 5000,
+  "checkpoint": "diagnostics\\seed_stability_results\\ppo\\seed_101\\model.pth",
+  "log_path": "diagnostics\\seed_stability_results\\ppo\\seed_101\\episodes.csv",
+  "parameters": {
+    "lr": 0.001,
+    "gamma": 0.99,
+    "batch_episodes": 8,
+    "ppo_epochs": 4,
+    "clip_epsilon": 0.2,
+    "value_coef": 0.5,
+    "entropy_coef": 0.01
+  },
+  "trained_mean_reward": 1.0679999999999998,
+  "trained_reward_std": 1.2202852125630301,
+  "trained_connection_rate": 0.78,
+  "random_mean_reward": 0.1109,
+  "random_connection_rate": 0.55
+}

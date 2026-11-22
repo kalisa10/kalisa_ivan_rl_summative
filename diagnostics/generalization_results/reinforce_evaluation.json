@@ -1,0 +1,72 @@
+{
+  "algorithm": "reinforce",
+  "checkpoint": "experiments\\results\\reinforce\\REINFORCE_03\\model.pth",
+  "training_seed": 42,
+  "evaluation_only": true,
+  "cohorts": {
+    "standard": {
+      "trained": {
+        "episodes": 200,
+        "mean_reward": 1.00105,
+        "reward_sd": 1.1394022930585737,
+        "connection_rate": 0.8,
+        "mean_connection_probability": 0.7421014484763145,
+        "reward_vs_random": {
+          "mean_difference": 0.9083999999999999,
+          "ci95_lower": 0.7141375,
+          "ci95_upper": 1.1025474999999996
+        },
+        "connection_vs_random": {
+          "mean_difference": 0.245,
+          "ci95_lower": 0.18,
+          "ci95_upper": 0.31
+        }
+      },
+      "random": {
+        "episodes": 200,
+        "mean_reward": 0.09264999999999997,
+        "connection_rate": 0.555
+      }
+    },
+    "access_barrier_stress": {
+      "trained": {
+        "episodes": 200,
+        "mean_reward": 0.49,
+        "reward_sd": 1.4669217076866823,
+        "connection_rate": 0.61,
+        "mean_connection_probability": 0.6105052578449249,
+        "reward_vs_random": {
+          "mean_difference": 1.02385,
+          "ci95_lower": 0.85037125,
+          "ci95_upper": 1.2093262499999997
+        },
+        "connection_vs_random": {
+          "mean_difference": 0.23,
+          "ci95_lower": 0.175,
+          "ci95_upper": 0.29
+        }
+      },
+      "random": {
+        "episodes": 200,
+        "mean_reward": -0.53385,
+        "connection_rate": 0.38
+      }
+    }
+  },
+  "protocol": {
+    "episodes_per_cohort": 200,
+    "standard_seed_start": 5000,
+    "stress_seed_start": 8000,
+    "bootstrap_resamples": 1500,
+    "policy": "greedy deterministic",
+    "random_policy": "uniform across five actions",
+    "paired_random_outcomes": "same environment episode seeds; each policy has an independent action RNG",
+    "stress_test": "access barrier present; phone=0; telehealth=0; risk in [0.80,0.90)",
+    "claim_limit": "Synthetic distribution shift, NOT real-world generalization or training-seed stability"
+  },
+  "stress_minus_standard": {
+    "mean_reward": -0.51105,
+    "connection_rate": -0.19000000000000006,
+    "interpretation": "Descriptive between-cohort difference; not a paired controlled effect"
+  }
+}
