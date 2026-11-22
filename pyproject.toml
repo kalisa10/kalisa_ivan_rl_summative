@@ -1,0 +1,21 @@
+[project]
+name = "kalisa-ivan-rl-summative"
+version = "0.1.0"
+description = "Synthetic community health patient-navigation RL environment"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "gymnasium>=1.1,<2",
+    "matplotlib>=3.8,<4",
+    "numpy>=1.26,<3",
+    "pygame>=2.6,<3",
+    "torch>=2.5,<3",
+    "torchrl>=0.10,<0.20",
+    "tensordict>=0.10,<0.20",
+]
+
+[dependency-groups]
+dev = ["pytest>=8,<10"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
