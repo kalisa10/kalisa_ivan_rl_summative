@@ -118,6 +118,7 @@ def train(algorithm="ppo", episodes=2000, seed=42, lr=0.001, gamma=0.99,
     parameters = list(actor.parameters()) + (list(critic.parameters()) if critic else [])
     optimizer = torch.optim.Adam(parameters, lr=lr)
     history = []
+    update_metrics = []
     updates = 0
     try:
         for start in range(0, episodes, batch_episodes):
@@ -156,9 +157,18 @@ def train(algorithm="ppo", episodes=2000, seed=42, lr=0.001, gamma=0.99,
                     policy_loss = -(log_probs * advantages).mean()
 
                 loss = policy_loss - entropy_coef * entropy
+                value_loss = None
                 if critic is not None:
                     value_loss = nn.functional.mse_loss(critic(states), returns)
                     loss = loss + value_coef * value_loss
+                update_metrics.append({
+                    "update": updates + 1,
+                    "episode": len(history),
+                    "policy_loss": float(policy_loss.detach().item()),
+                    "value_loss": float(value_loss.detach().item()) if value_loss is not None else "",
+                    "entropy": float(entropy.detach().item()),
+                    "total_loss": float(loss.detach().item()),
+                })
                 optimizer.zero_grad()
                 loss.backward()
                 nn.utils.clip_grad_norm_(parameters, 1.0)
@@ -182,7 +192,13 @@ def train(algorithm="ppo", episodes=2000, seed=42, lr=0.001, gamma=0.99,
         writer = csv.DictWriter(file, fieldnames=["episode", "reward"])
         writer.writeheader()
         writer.writerows(history)
-    print(f"Saved: {save_path} | log: {log_path}")
+    # Entropy and loss values are logged per optimizer update, not fabricated from rewards.
+    updates_path = log_path.with_name(log_path.stem + "_updates.csv")
+    with updates_path.open("w", newline="", encoding="utf-8") as file:
+        writer = csv.DictWriter(file, fieldnames=["update", "episode", "policy_loss", "value_loss", "entropy", "total_loss"])
+        writer.writeheader()
+        writer.writerows(update_metrics)
+    print(f"Saved: {save_path} | log: {log_path} | optimizer log: {updates_path}")
     return history
 
 

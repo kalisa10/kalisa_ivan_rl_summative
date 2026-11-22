@@ -89,6 +89,7 @@ def train(episodes=2000, seed=42, batch_size=64, learning_rate=0.001,
     optimizer = torch.optim.Adam(online.parameters(), lr=learning_rate)
     replay = deque(maxlen=replay_capacity)
     outcomes = []
+    update_metrics = []
     total_updates = 0
     total_steps = 0
 
@@ -125,6 +126,10 @@ def train(episodes=2000, seed=42, batch_size=64, learning_rate=0.001,
                         next_best = target(next_states).max(dim=1).values
                         expected_q = rewards + gamma * (1 - dones) * next_best
                     loss = F.smooth_l1_loss(current_q, expected_q)
+                    td_error = (current_q.detach() - expected_q).abs().mean().item()
+                    update_metrics.append({"update": total_updates + 1, "episode": episode + 1,
+                                           "loss": float(loss.detach().item()),
+                                           "mean_absolute_td_error": float(td_error)})
                     optimizer.zero_grad()
                     loss.backward()
                     nn.utils.clip_grad_norm_(online.parameters(), 10.0)
@@ -152,7 +157,14 @@ def train(episodes=2000, seed=42, batch_size=64, learning_rate=0.001,
         writer = csv.DictWriter(file, fieldnames=["episode", "steps", "reward", "epsilon"])
         writer.writeheader()
         writer.writerows(outcomes)
-    print(f"Saved model: {save_path} | episode log: {log_path} | steps: {total_steps}")
+    # A separate, lossless optimizer-update log supports the rubric's DQN-loss figure.
+    updates_path = log_path.with_name(log_path.stem + "_updates.csv")
+    with updates_path.open("w", newline="", encoding="utf-8") as file:
+        writer = csv.DictWriter(file, fieldnames=["update", "episode", "loss", "mean_absolute_td_error"])
+        writer.writeheader()
+        writer.writerows(update_metrics)
+    print(f"Saved model: {save_path} | episode log: {log_path} | "
+          f"optimizer log: {updates_path} | steps: {total_steps}")
     return outcomes
 
 
