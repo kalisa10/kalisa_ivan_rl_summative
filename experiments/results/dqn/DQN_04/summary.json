@@ -1,0 +1,25 @@
+{
+  "experiment": "DQN_04",
+  "algorithm": "dqn",
+  "episodes": 2000,
+  "seed": 42,
+  "evaluation_episodes": 100,
+  "evaluation_seed_start": 1000,
+  "parameters": {
+    "learning_rate": 0.001,
+    "gamma": 0.95,
+    "batch_size": 64,
+    "epsilon_end": 0.05,
+    "replay_capacity": 10000,
+    "warmup": 128,
+    "target_every": 100
+  },
+  "model_path": "experiments\\results\\dqn\\DQN_04\\model.pth",
+  "episode_log": "experiments\\results\\dqn\\DQN_04\\episodes.csv",
+  "final_100_training_mean_reward": 1.1375,
+  "trained_mean_reward": 0.9133999999999999,
+  "trained_reward_std": 1.2885846654372386,
+  "trained_connection_rate": 0.75,
+  "random_mean_reward": 0.23059999999999994,
+  "random_connection_rate": 0.59
+}

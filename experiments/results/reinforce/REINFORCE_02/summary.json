@@ -1,0 +1,22 @@
+{
+  "experiment": "REINFORCE_02",
+  "algorithm": "reinforce",
+  "episodes": 2000,
+  "seed": 42,
+  "evaluation_episodes": 100,
+  "evaluation_seed_start": 1000,
+  "parameters": {
+    "lr": 0.0005,
+    "gamma": 0.99,
+    "batch_episodes": 16,
+    "entropy_coef": 0.01
+  },
+  "model_path": "experiments\\results\\reinforce\\REINFORCE_02\\model.pth",
+  "episode_log": "experiments\\results\\reinforce\\REINFORCE_02\\episodes.csv",
+  "final_100_training_mean_reward": 0.4725999999999999,
+  "trained_mean_reward": -0.37,
+  "trained_reward_std": 1.4852272553383876,
+  "trained_connection_rate": 0.43,
+  "random_mean_reward": 0.23059999999999994,
+  "random_connection_rate": 0.59
+}

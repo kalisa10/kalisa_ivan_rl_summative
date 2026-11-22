@@ -1,0 +1,23 @@
+{
+  "experiment": "A2C_01",
+  "algorithm": "a2c",
+  "episodes": 2000,
+  "seed": 42,
+  "evaluation_episodes": 100,
+  "evaluation_seed_start": 1000,
+  "parameters": {
+    "lr": 0.001,
+    "gamma": 0.99,
+    "batch_episodes": 16,
+    "value_coef": 0.5,
+    "entropy_coef": 0.01
+  },
+  "model_path": "experiments\\results\\a2c\\A2C_01\\model.pth",
+  "episode_log": "experiments\\results\\a2c\\A2C_01\\episodes.csv",
+  "final_100_training_mean_reward": 0.5316,
+  "trained_mean_reward": 0.5397999999999998,
+  "trained_reward_std": 1.3729333414263054,
+  "trained_connection_rate": 0.71,
+  "random_mean_reward": 0.23059999999999994,
+  "random_connection_rate": 0.59
+}
